@@ -14,3 +14,6 @@ cmd.composer=composer
 
 # test server start
 cmd.testserver=node
+
+# Pirum command
+cmd.pirum=pirum

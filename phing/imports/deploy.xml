@@ -119,6 +119,7 @@
                 version="${new.version}"
                 deploy="false"
                 makephar="false"
+                pirum="${cmd.pirum}"
                 />
     </target>
 

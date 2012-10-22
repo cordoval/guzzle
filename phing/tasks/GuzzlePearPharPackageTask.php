@@ -17,6 +17,7 @@ class GuzzlePearPharPackageTask extends Task
     private $version;
     private $deploy = true;
     private $makephar = true;
+    private $pirum = 'pirum';
 
     private $subpackages = array();
 
@@ -28,6 +29,16 @@ class GuzzlePearPharPackageTask extends Task
     public function getVersion()
     {
         return $this->version;
+    }
+
+    public function setPirum($str)
+    {
+        $this->pirum = $str;
+    }
+
+    public function getPirum()
+    {
+        return $this->pirum;
     }
 
     public function setDeploy($deploy)
@@ -83,9 +94,9 @@ class GuzzlePearPharPackageTask extends Task
             $this->log('building single PEAR package');
             $this->buildSinglePackage();
         } else {
-            // $this->log("building PEAR subpackages");
-            // $this->createSubPackages();
-            // $this->log("building PEAR bundle package");
+            $this->log("building PEAR subpackages");
+            $this->createSubPackages();
+            $this->log("building PEAR bundle package");
             $this->buildSinglePackage();
         }
 
@@ -113,7 +124,7 @@ class GuzzlePearPharPackageTask extends Task
         // add PEAR packages
         foreach (scandir($basedir . '/build/pearwork') as $file) {
             if (substr($file, -4) == '.tgz') {
-                passthru('pirum add guzzle.github.com/pear '.$file);
+                passthru($this->getPirum() . ' add guzzle.github.com/pear '.$file);
             }
         }
 
